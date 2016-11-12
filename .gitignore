@@ -1,0 +1,6 @@
+.bundle
+.cache_rake_t
+vendor/
+.byebug_history
+log/
+coverage/
