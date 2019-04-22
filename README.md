@@ -1,5 +1,7 @@
 # Rake Tasks for the Cloud Foundry API
 
+[![Build Status](https://travis-ci.org/suhlig/cf-rake.svg?branch=master)](https://travis-ci.org/suhlig/cf-rake)
+
 Assumes that the user has already authenticated using the `cf` command.
 
 ## Org
