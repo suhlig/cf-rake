@@ -1,56 +1,19 @@
 # frozen_string_literal: true
-require 'cloud_foundry/rake/domain_task'
-require 'cloud_foundry/rake/organization_task'
+require 'cloud_foundry/rake'
 
-# namespace :space do
-#   task :exist do
-#   end
-#
-#   task create: exist do
-#     cf create-space -o some-org some-space
-#   end
-# end
-#
-# namespace :services do
-#   task :exist do
-#   end
-#
-#   task create: exist do
-#     cf create-service object-storage Free some-backend
-#   end
-# end
-# end
-
-file 'one' => 'prereq' do |task|
-  warn "Creating #{task}"
+# ok
+organization 'webservices' do |t|
+  t.name = 'XMLSOA'
 end
 
-#desc 'create all domains'
-#task domains: ['a.example.com', 'b.example.com']
+# ok
+domain 'ws.uhlig.it', 'XMLSOA'
 
-task 'prereq-prereq' do |task|
-  warn "Running #{task}"
+# broken (does not resolve webservices to XMLSOA yet)
+desc 'Target our org'
+task debug: ['webservices'] do |t|
+  puts `cf target -o #{t.prerequisites.first}`
 end
 
-task prereq: ['prereq-prereq']  do |task|
-  warn "Running #{task}"
-end
-
-CloudFoundry::Rake::DomainTask.new('a.example.com') do |t|
-  t.org_name = 'some-org'
-end
-
-CloudFoundry::Rake::DomainTask.new('b.example.com' => ['some-org', 'prereq']) do |t|
-  t.org_name = 'some-other-org'
-end
-
-# with DSL:
-desc 'Create the c domain'
-domain 'c.example.com', 'some-org' => ['some-org', 'prereq']
-
-organization 'some-org' do |task|
-  warn "Working on #{task.name}"
-end
-
-desc 'Create the d domain'
-domain 'd.example.com', 'some-org' => ['some-org']
+# TODO
+# space 'webservices', 'XMLSOA'
