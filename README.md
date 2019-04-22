@@ -23,3 +23,7 @@ task :deploy => ['dev'] do
   puts "cf push ..."
 end
 ```
+
+# TODO
+
+* Check whether Ruby Tapas' [Episode #420: Rake Custom Task](https://www.rubytapas.com/2016/06/16/episode-420-rake-custom-task/) helps
