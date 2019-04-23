@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 require 'cloud_foundry/rake'
 
-# ok
 organization 'webservices' do |t|
   t.name = 'XMLSOA'
 end
 
-# ok
 domain 'ws.uhlig.it', 'XMLSOA'
 
-# broken (does not resolve webservices to XMLSOA yet)
 desc 'Target our org'
 task debug: ['webservices'] do |t|
-  puts `cf target -o #{t.prerequisites.first}`
+  puts `cf target -o XMLSOA` # note that we cannot use the webservices => XMLSOA indirection here
 end
 
 # TODO
